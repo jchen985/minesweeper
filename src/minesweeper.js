@@ -1,32 +1,43 @@
-// const blankline = '   |   |   ';
-// console.log('This is the empty one:');
-// console.log(blankline);
-// console.log(blankline);
-// console.log(blankline);
-//
-// const guessline = ' 1 |   |   ';
-// const bombline = '   | B |   ';
-// console.log('This is what a board with a guess line look like: ');
-// console.log(guessline);
-// console.log(bombline);
-// console.log(blankline);
-const printBoard = (board) =>{
-  console.log('Current Board: \n');
-  let i = 0;
-  while (i < 3){
-    console.log(board[i].join(' | '));
-    i ++;
+const generatePlayerBoard = (numberOfRows, numberOfcolumns) => {
+  let board = [];
+  for (let rows = 0; rows < numberOfRows; rows++){
+    let the_row = [];
+    for (let columns = 0; columns < numberOfcolumns; columns++){
+      the_row.push(' ');
+    }
+    board.push(the_row);
   }
+  return board;
 }
 
-let board = [];
-board = [
-  [' ',' ',' '],
-  [' ',' ',' '],
-  [' ',' ',' ']
-];
 
-printBoard(board);
-board[0][1] = '1';
-board[2][2] = 'B';
-printBoard(board);
+const generateBombBoard = (numberOfRows, numberOfColumns, numberOfBombs) => {
+  let board = [];
+  for (let rows = 0; rows < numberOfRows; rows++){
+    let the_row = [];
+    for (let columns = 0; columns < numberOfColumns; columns++){
+      the_row.push(' ');
+    }
+    board.push(the_row);
+  }
+  let numberOfBombsPlaced = 0;
+  while (numberOfBombsPlaced < numberOfBombs){ //may place B on a B
+    let randomRowIndex = Math.floor(Math.random() * numberOfRows);
+    let randomColumnIndex = Math.floor(Math.random() * numberOfColumns);
+    board[randomRowIndex][randomColumnIndex] = 'B';
+    numberOfBombsPlaced++;
+  }
+  return board;
+}
+
+
+const printBoard = board => {
+  console.log(board.map(row => row.join(' | ')).join('\n'));
+}
+
+let playerBoard = generatePlayerBoard(3,4);
+let bombBoard = generateBombBoard(3,4,5);
+console.log('Player board: ');
+printBoard(playerBoard);
+console.log('Bomb board: ');
+printBoard(bombBoard);
