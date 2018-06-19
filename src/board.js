@@ -26,9 +26,9 @@ export class Board {
 
   flipTile (rowIndex, columnIndex) {
     if(rowIndex >= this._numberOfRows || columnIndex >= this._numberOfColumns){
-      console.log('Your input is out of index, buddy \n');
+      console.log('\tYour input is out of index, buddy \n');
     }else if(this._playerBoard[rowIndex][columnIndex] !== ' '){ //not empty
-      console.log('This tile has already been flipped!');
+      console.log('\tThis tile has already been flipped!');
       return;
     }else if(this._bombBoard[rowIndex][columnIndex] === 'B') { //it is a Bomb
       this._playerBoard[rowIndex][columnIndex] = "B";

@@ -13,6 +13,7 @@ import {Board} from './board';
 class Game {
   constructor(numberOfRows, numberOfColumns, numberOfBombs){
     this._board = new Board(numberOfRows, numberOfColumns, numberOfBombs);
+    this._startTime = Date.now();
   }
 
   playMove(rowIndex, columnIndex){
@@ -21,11 +22,15 @@ class Game {
     if(rowIndex >= this._board.numberOfRows || columnIndex >= this._board.numberOfColumns){
       return;
     }else if (this._board.playerBoard[rowIndex][columnIndex] === 'B'){
-      console.log('GAME OVER, GG \n New game board is created for you if you want to try again, buddy\n');
+      console.log('\tGAME OVER, GG \n New game board is created for you if you want to try again, buddy\n');
+      let finishTime = (Date.now() - this._startTime)/1000; //divided by 1000 so that it is in seconds
+      console.log('\tYou lost the game in: ' + finishTime + 'seconds\n')
       this._board.print();
       this._board = new Board(this._board.numberOfRows, this._board.numberOfColumns, this._board.numberOfBombs);
     }else if (this._board.hasSafeTiles() === false){
-      console.log('YOU WIN, GG \n');
+      let finishTime = (Date.now() - this._startTime)/1000; //divided by 1000 so that it is in seconds
+      console.log('\tYOU WIN, GG \n\tNew game board is created for you if you want to try again, buddy\n\tYou finished in: ' + finishTime + 'seconds\n');
+      this._board = new Board(this._board.numberOfRows, this._board.numberOfColumns, this._board.numberOfBombs);
     }else{
       console.log('Current Board:');
       this._board.print();
