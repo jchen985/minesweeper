@@ -1,7 +1,9 @@
 # minesweeper
-a mine sweeper game generated and played by the terminal.
+A mine sweeper game generated and played by the terminal.
+
 It's written in javaScript.
-the ES6 version in src and the ES5 version(transpilation by npm packages) in lib.
+
+The ES6 version is in src and the ES5 version(transpilation by npm packages) is in lib.
 
 // To play Minesweeper, instances of MineSweeperGame will be generated in command line.
 // For example:
